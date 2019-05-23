@@ -1,14 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import styled from "styled-components"
-import {Exercises} from "./Data"
+import {Exercises} from "./Data";
+import "../App.css";
+import Checkbox from "./Checkbox"
 
 
+const ListDiv = styled.div `
+display: flex;
+border: 1px solid black;
+align-items: flex-start;
+
+`
 
 
 export default class Randomizer extends Component {
     
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
         this.state= {
             allData: []
         }
@@ -20,7 +28,7 @@ export default class Randomizer extends Component {
         this.setState({data1: [data1]})
        
         let data2 = Exercises[Math.floor(Math.random() * Exercises.length)]
-            if (data2.name !== data1.name){
+            if (data2 !== data1){
                 this.setState({data2: [data2]})
             }else{
                 data2 = Exercises[Math.floor(Math.random() * Exercises.length)]
@@ -44,19 +52,13 @@ export default class Randomizer extends Component {
  
   render() {
       const workouts = this.state.allData.map((allData, id) => 
-      <li key={id}>{allData.name}</li>)
+      <li key={id}><Checkbox></Checkbox>{allData.name}</li>)
     return (
-    <div> <h1>Random workouts selection!</h1>
-        <div>
+    <div style={{display: "inline-block", justifyContent: "flex-start", alignContent:"flex-start", verticalAlign: 'middle', }}> <h1>Random workouts selection!</h1>
+        <ListDiv>
             <ul>{workouts}</ul>
-           
-          {/* <h1>{this.state.data}</h1> */}
-          
-         {/* {data.map(data =>
-           <h1>Name: {data.name} </h1>)} */}
-           <button onClick={() => this.getExercises()}>get exercise</button>
-           
-        </div>
+        </ListDiv>
+        <button onClick={() => this.getExercises()}>get exercise</button>
         </div>
     
     )
