@@ -5,6 +5,7 @@ import "../App.css";
 import Checkbox from "./Checkbox"
 
 
+
 const ListDiv = styled.div `
 display: flex;
 border: 1px solid black;
@@ -55,8 +56,8 @@ export default class Randomizer extends Component {
         
      
             
-        this.setState({allData:[data1,data2,data3]})
-        // console.log(data1, data2, data3)
+        this.setState({allData:[...new Set([data1,data2,data3])]})
+        console.log(data1, data2, data3)
       
     }
     
