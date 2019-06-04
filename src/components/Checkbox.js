@@ -65,7 +65,7 @@ const CheckboxButton = ({ className, checked, ...props }) => (
 
 export default class Checkbox extends Component {
   
-    state = {checked: false,
+    state = {checked: this.props.checked,
     name: this.props.name}
 
     handleCheckboxChange = event =>
@@ -73,7 +73,7 @@ export default class Checkbox extends Component {
 
 render() {
   
-    // console.log(this.state)
+    console.log(this.state)
     return (
        
         <label>
