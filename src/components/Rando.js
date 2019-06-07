@@ -22,7 +22,7 @@ const pickRandom = (arr,count) => {
 
 
 
-export default class Randomizer extends Component {
+export default class Rando extends Component {
     
     constructor(props){
         super(props);
@@ -93,47 +93,78 @@ export default class Randomizer extends Component {
         let [data5] = await result.splice(4,1)
         this.setState({data5:[data5]})
 
+        // let exercise1 = await result.splice(5,1)
+        // this.setState({exercise1: exercise1})
+        // let data2 = await Exercises[Math.floor(Math.random() * Exercises.length)]
+        //     if (data2 !== data1){
+        //         this.setState({data2: data2})
+        //     }else{
+        //         data2 = Exercises[Math.floor(Math.random() * Exercises.length)]
+        //     };
+
+        // let data3 = await Exercises[Math.floor(Math.random() * Exercises.length)];
+        // if (data3 !== data2 && data3 !== data1){
+        //     this.setState({data3: [data3]})
+        // }else{
+        //     data3 = Exercises[Math.floor(Math.random() * Exercises.length)]
+        // };
+
+        
+     
+            
         this.setState({allData:[...new Set([data1,data2,data3,data4,data5,])]})
         console.log( data2, data3,data4,data5,)
-   
-
-
+    //   this.setState({allData:[... new Set([data1])]})
     }
     
+ 
+// onChange = (e) => {
+//     this.setState(this.allData[{checked:true}], e.target.checked)
+//     console.log(this.state)
+// }
+
+// isChecked() {
+//     this.setState({allData:[{checked: true}]})
+//     console.log(this.allData.checked)
+// }
+
+ 
   render() {
       const workouts =  this.state.allData.map((allData, id) => 
       <li key={id}><Checkbox name={allData.name}></Checkbox>{allData.name}</li>)
+    
 
-   
+    //   const workouts =  this.state.allData.map((allData, id) => 
+    //   <li key={id}><Checkbox name={allData.name}></Checkbox>{allData.name}</li>)
 
-    const spot1 = this.state.allData.map(obj => {
-        let finalspot = {};
-        finalspot[obj.id] = obj.name
-        return finalspot
-    })
-
-    console.log(spot1)
-
+    //   let Exercise1 = pickRandom(Exercises,11)
+    //   let newExercise = Exercise1.splice(5,1)
+    //   console.log(newExercise.name)
+    
     return (
         <div>
     <div style={{display: "inline-block", justifyContent: "flex-start", alignContent:"flex-start", verticalAlign: 'middle', }}> <h1>Random workouts selection!</h1>
         <ListDiv>
-            <ul>
-                <li>{workouts[0]}</li>
-                <li>{workouts[1]}</li>
-                <li>{workouts[2]}</li>
-                <li>{workouts[3]}</li>
-                <li>{workouts[4]}</li>
-            
-            
-            
-            </ul>
+            <ul>{workouts}</ul>
             
         </ListDiv>
         <button   onClick={() => this.getExercises()}>get exercise</button>
         </div>
-         <div>
-            
+        {/* <div>
+            {this.state.data1}
+            <input hidden type="checkbox" checked={this.state.exercise1Locked} onChange={e => this.setState(prevState => ({exercise1Locked: !prevState.exercise1Locked}))}></input>
+            <ul>
+                <li>{newExercise.name}</li>
+                <li>{this.data2}</li>
+                <li>{this.data3}</li>
+                <li>{this.data4}</li>
+                <li>{this.data5}</li>
+                
+            </ul>
+        </div> */}
+
+        <div>
+            {this.state.data1}
             <input hidden type="checkbox" checked={this.state.exercise1Locked} onChange={e => this.setState(prevState => ({exercise1Locked: !prevState.exercise1Locked}))}></input>
         </div>
 
