@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from "styled-components"
 import {Exercises} from "./Data";
 import "../App.css";
-import Checkbox from "./Checkbox"
+// import Checkbox from "./Checkbox"
 
 
 
@@ -21,7 +21,6 @@ const pickRandom = (arr,count) => {
 
 
 
-
 export default class Randomizer extends Component {
     
     constructor(props){
@@ -29,29 +28,14 @@ export default class Randomizer extends Component {
         this.state= {
             allData: [
             ],
-            data1: {}
-               ,
-            // data2: {
-               
-            // },
-            // data3: {
             
-            // },
-            // data4:{
-            //     checked: false,
-            //     name: ""
-            // },
-            // data5: {
-            //     checked: false,
-            //     name: "",
-            // },
-
-            exercise1Locked: false,
-            exercise2Locked: false,
-            exercise3Locked: false,
-            exercise4Locked: false,
-            exercise5Locked: false,
-            
+            ExercisesLocked:[
+            false,
+            false,
+            false,
+            false,
+            false,
+            ]
         }
     }
 
@@ -60,22 +44,12 @@ export default class Randomizer extends Component {
         console.log(this.allData.checked)
     }
     
-    
-    // getExercise = async () => {
-    //     if (this.state.exercise1Locked === false ) { 
-    //         await this.setState({exercise1: Math.ceil(Math.random() * 6)});
-    //     }
-    // }
 
   async getExercises() {
     let result = await pickRandom(Exercises,11)
         console.log(result)
 
-// // placeExercise = async () => {
-// //         if(this.state.exercise1Locked === false){
-// //             let data1 = await this.result.splice(0,1)
-// //             this.setState({data1: [data1]})
-//         }
+
          let [data1] = await result.splice(0,1)
         this.setState({data1: [data1]})
         console.log(data1.name);
@@ -94,36 +68,36 @@ export default class Randomizer extends Component {
         this.setState({data5:[data5]})
 
         this.setState({allData:[...new Set([data1,data2,data3,data4,data5,])]})
-        console.log( data2, data3,data4,data5,)
-   
-
-
+        console.log( data1,data2, data3,data4,data5,)
     }
+
+ exerciseChecked = (id)  => {
+    this.setState(prev => ({
+        ExercisesLocked: prev.ExercisesLocked.map((val, i) => !val && i === id ? true : val)
+    }))
+    console.log(this.ExercisesLocked)
+    
+ }
     
   render() {
       const workouts =  this.state.allData.map((allData, id) => 
-      <li key={id}><Checkbox name={allData.name}></Checkbox>{allData.name}</li>)
+      <li key={id}><input type ="checkbox" ></input>{allData.name}</li>)
 
    
-
-    const spot1 = this.state.allData.map(obj => {
-        let finalspot = {};
-        finalspot[obj.id] = obj.name
-        return finalspot
-    })
-
-    console.log(spot1)
+    
 
     return (
         <div>
-    <div style={{display: "inline-block", justifyContent: "flex-start", alignContent:"flex-start", verticalAlign: 'middle', }}> <h1>Random workouts selection!</h1>
+    <div style={{display: "inline-block", justifyContent: "flex-start", alignContent:"flex-start", verticalAlign: 'middle', }}> 
+
+    <h1>Random workouts selection!</h1>
         <ListDiv>
             <ul>
-                <li>{workouts[0]}</li>
-                <li>{workouts[1]}</li>
-                <li>{workouts[2]}</li>
-                <li>{workouts[3]}</li>
-                <li>{workouts[4]}</li>
+                {workouts[0]}
+                {workouts[1]}
+                {workouts[2]}
+                {workouts[3]}
+                {workouts[4]}
             
             
             

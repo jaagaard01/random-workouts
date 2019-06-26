@@ -64,13 +64,17 @@ const CheckboxButton = ({ className, checked, ...props }) => (
  
 
 export default class Checkbox extends Component {
+  constructor(props){
+    super(props);
   
-    state = {checked: this.props.checked,
-    name: this.props.name}
+  
+    this.state = {ExercisesLocked: this.props.ExercisesLocked}
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
+  }
 
-    handleCheckboxChange = event =>
+    handleCheckboxChange = (event) =>{
     this.setState({ checked: event.target.checked })
-
+  }
 render() {
   
     // console.log(this.state)
@@ -80,7 +84,7 @@ render() {
           <CheckboxButton
             checked={this.state.checked}
             onChange={this.handleCheckboxChange} 
-            name={this.props.name}
+          
             
           /> 
         </label>
